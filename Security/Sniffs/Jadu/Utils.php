@@ -138,9 +138,6 @@ class Utils extends BaseUtils
             // Safe formats
             'intval',
             '(int)',
-
-            // Other
-            '.', // Reporting concatenation on print is overly cautious.
         ];
     }
 
