@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" name="JaduSecurity" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/squizlabs/PHP_CodeSniffer/master/phpcs.xsd">
+    <description>Rules for Jadu projects</description>
+
+    <!-- Code Reviews Rules -->
+    <!--
+    <rule ref="Generic.CodeAnalysis.UnusedFunctionParameter"/>
+    <rule ref="PEAR"/>
+    -->
+
+    <!-- Security Code Reviews Rules -->
+
+    <!-- Global properties. -->
+    <!-- Please note that not every sniff uses them and they can be overwritten per rule. -->
+    <!-- Framework or CMS used. Must be a class under Security_Sniffs. -->
+    <config name="CmsFramework" value="Jadu"/>
+    <!-- Paranoia mode: Will generate more alerts but will miss less vulnerabilites. Good for assisting manual code review. -->
+    <config name="ParanoiaMode" value="0"/>
+    <config name="ignore_warnings_on_exit" value="true"/>
+
+    <arg name="extensions" value="php" />
+
+    <rule ref="Internal.NoCodeFound">
+        <severity>0</severity>
+    </rule>
+
+    <!-- BadFunctions -->
+    <!-- PHP functions that can lead to security issues -->
+    <rule ref="Security.BadFunctions.Asserts"/>
+    <rule ref="Security.BadFunctions.Backticks"/>
+    <rule ref="Security.BadFunctions.CallbackFunctions">
+        <exclude name="Security.BadFunctions.CallbackFunctions.WarnCallbackFunctions"/>
+    </rule>
+    <rule ref="Security.BadFunctions.CryptoFunctions"/>
+    <rule ref="Security.BadFunctions.EasyRFI"/>
+    <rule ref="Security.BadFunctions.EasyXSS">
+        <properties>
+            <!-- Comment out to follow global ParanoiaMode -->
+            <property name="forceParanoia" value="1"/>
+        </properties>
+    </rule>
+    <rule ref="Security.BadFunctions.ErrorHandling"/>
+    <rule ref="Security.BadFunctions.FilesystemFunctions"/>
+    <rule ref="Security.BadFunctions.FringeFunctions"/>
+    <rule ref="Security.BadFunctions.FunctionHandlingFunctions"/>
+    <rule ref="Security.BadFunctions.Mysqli"/>
+    <rule ref="Security.BadFunctions.NoEvals"/>
+    <rule ref="Security.BadFunctions.Phpinfos"/>
+    <rule ref="Security.BadFunctions.PregReplace"/>
+    <rule ref="Security.BadFunctions.SQLFunctions"/>
+    <rule ref="Security.BadFunctions.SystemExecFunctions"/>
+
+    <!-- CVE -->
+    <!-- Entries from CVE database from vendor PHP and bugs.php.net -->
+    <rule ref="Security.CVE.CVE20132110"/>
+    <rule ref="Security.CVE.CVE20134113"/>
+
+    <!-- Misc -->
+    <rule ref="Security.Misc.BadCorsHeader"/>
+    <rule ref="Security.Misc.IncludeMismatch">
+        <exclude name="Security.Misc.IncludeMismatch.ErrMiscIncludeMismatchNoExt"/>
+    </rule>
+    <rule ref="Security.Misc.TypeJuggle"/>
+</ruleset>
